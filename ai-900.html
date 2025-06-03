@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-900 Microsoft Azure AI Fundamentals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0078d4 0%, #00188f 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.08)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.06)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+        
+        .left-column, .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #0078d4;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0078d4, #00bcf2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            color: #0078d4;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            width: 24px;
+            height: 24px;
+            background: #0078d4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .modules {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .module {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e3e3e3;
+            transition: all 0.3s ease;
+        }
+        
+        .module:hover {
+            border-color: #0078d4;
+            box-shadow: 0 5px 15px rgba(0,120,212,0.1);
+        }
+        
+        .module h4 {
+            color: #0078d4;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .module p {
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.3;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #00bcf2 0%, #0078d4 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: pulse 3s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .highlight-box p {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .feature-tag {
+            background: rgba(0,120,212,0.1);
+            color: #0078d4;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.85em;
+            font-weight: 500;
+            border: 1px solid rgba(0,120,212,0.2);
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            border-top: 1px solid #e3e3e3;
+        }
+        
+        .footer strong {
+            color: #0078d4;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .single-column {
+            grid-column: 1 / -1;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .modules {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI-900</h1>
+            <div class="subtitle">Microsoft Azure AI Fundamentals - Formation Intensive</div>
+        </div>
+        
+        <div class="content">
+            <div class="left-column">
+                <div class="card">
+                    <h3><span class="icon">🎯</span>Objectifs de Formation</h3>
+                    <ul>
+                        <li>Décrire les charges de travail et considérations de l'Intelligence Artificielle</li>
+                        <li>Maîtriser les principes fondamentaux du Machine Learning sur Azure</li>
+                        <li>Comprendre les fonctionnalités de la vision par ordinateur sur Azure</li>
+                        <li>Explorer le traitement du langage naturel (NLP) sur Azure</li>
+                        <li>Découvrir les fonctionnalités de l'IA conversationnelle sur Azure</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="icon">📚</span>Programme de Formation</h3>
+                    <div class="modules">
+                        <div class="module">
+                            <h4>Module 1: Introduction à l'IA</h4>
+                            <p>Intelligence artificielle dans Azure, IA responsable et considérations éthiques</p>
+                        </div>
+                        <div class="module">
+                            <h4>Module 2: Machine Learning</h4>
+                            <p>Concepts fondamentaux ML, Azure Machine Learning service</p>
+                        </div>
+                        <div class="module">
+                            <h4>Module 3: Vision par Ordinateur</h4>
+                            <p>Concepts de vision, services Azure pour l'analyse d'images et vidéos</p>
+                        </div>
+                        <div class="module">
+                            <h4>Module 4: Traitement du Langage Naturel</h4>
+                            <p>Analyse de texte, reconnaissance vocale, traduction et synthèse</p>
+                        </div>
+                        <div class="module">
+                            <h4>Module 5: IA Conversationnelle</h4>
+                            <p>Concepts de chatbots et agents conversationnels dans Azure</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="icon">👥</span>Public Cible</h3>
+                    <p>Toute personne désireuse de comprendre les solutions d'intelligence artificielle et les services Microsoft Azure pour créer ces solutions.</p>
+                    <div class="features">
+                        <span class="feature-tag">Débutants en IA</span>
+                        <span class="feature-tag">Professionnels IT</span>
+                        <span class="feature-tag">Étudiants</span>
+                        <span class="feature-tag">Managers</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-column">
+                <div class="highlight-box">
+                    <h3>🚀 Formation Intensive</h3>
+                    <p><strong>Formation en présentiel ou virtuelle</strong><br>
+                    Cours intensif sur 2 jours</p>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="icon">📋</span>Prérequis</h3>
+                    <ul>
+                        <li>Aisance avec les ordinateurs et navigateurs web</li>
+                        <li>Maîtrise fondamentale des mathématiques</li>
+                        <li>Capacité à interpréter des graphiques et diagrammes</li>
+                        <li>Connaissances de base en programmation (utiles mais non obligatoires)</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="icon">🏆</span>Certification</h3>
+                    <p>Cette formation prépare à l'examen <strong>AI-900: Microsoft Azure AI Fundamentals</strong></p>
+                    <p>Certification obtenue : <strong>Microsoft Certified: Azure AI Fundamentals</strong></p>
+                    <div class="features">
+                        <span class="feature-tag">Examen officiel Microsoft</span>
+                        <span class="feature-tag">Centre agréé</span>
+                        <span class="feature-tag">Certification reconnue</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="icon">🎓</span>Méthodologie</h3>
+                    <ul>
+                        <li><strong>Pre-Study:</strong> Accès au matériel officiel Microsoft dès l'inscription</li>
+                        <li><strong>Formation:</strong> Sessions avec formateurs certifiés Microsoft (MCT)</li>
+                        <li><strong>After-Study:</strong> Accès continu aux ressources pour révisions</li>
+                        <li><strong>Support:</strong> Contenu Microsoft officiel et matériel à valeur ajoutée</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="content">
+            <div class="card single-column">
+                <h3><span class="icon">✨</span>Formations Disponibles</h3>
+                <div class="modules">
+                    <div class="module">
+                        <h4>Formation Intensive (AI900)</h4>
+                        <p>Formation intensive en présentiel ou virtuelle pour une montée en compétences rapide</p>
+                    </div>
+                    <div class="module">
+                        <h4>Formation Flexible (AI900V)</h4>
+                        <p>Format flexible avec sessions réparties pour s'adapter à votre planning</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+        <!-- <div class="footer">
+            Formation proposée par <strong>Digicomp</strong> | 
+            Plus d'informations sur <strong>digicomp.ch</strong> | 
+            <strong>Formation certifiante Microsoft officielle</strong>
+        </div> -->
+        <div class="footer">
+        </div>
+    </div>
+</body>
+</html>
